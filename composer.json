@@ -1,0 +1,14 @@
+{
+    "name": "machec/contracts",
+    "description": "Shared Composer package for cross-app value objects, casts, and services used by the Machec Laravel Cloud apps.",
+    "license": "proprietary",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Machec\\Contracts\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.3"
+    }
+}
