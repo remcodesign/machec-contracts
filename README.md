@@ -39,7 +39,7 @@ Consuming apps pin a version range in their own `composer.json`:
         {"type": "vcs", "url": "git@github.com:remcodesign/machec-contracts.git"}
     ],
     "require": {
-        "machec/contracts": "^0.1"
+        "machec/contracts": "^0.2"
     }
 }
 ```
@@ -48,11 +48,17 @@ After tagging a new release, bump the constraint in each consuming app
 (`composer update machec/contracts`) — this is a manual step per app, not
 automated by this repo.
 
-## What's already here (Step 0.5, D90)
+## What's already here
 
 - `composer.json` — package name `machec/contracts`, PSR-4
-  `Machec\Contracts\` → `src/`.
-- Empty `src/` — no real classes yet.
+  `Machec\Contracts\` → `src/` (Step 0.5, D90).
+- `src/Enums/RoleName.php` (Step 2.3, D12/D53) — `Customer`/`CustomerAdmin`/
+  `DataAdmin`/`CommercialAdmin`/`WmsAdmin` cases, backing the `roles.name`
+  rows those three apps seed. `pim_admin` is deliberately **not** a case
+  here (D53) — `pim-core` checks it as a plain string literal against its
+  own local roles table instead. First consumed by `customer-identity`'s
+  `Step 2.3` seeder; `commercial-core`/`logistics-wms` pick it up whenever
+  their own Step 5.0/8.0 actually mounts this package, not before.
 
 ## What's still needed for v1
 
