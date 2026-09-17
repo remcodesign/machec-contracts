@@ -59,6 +59,15 @@ automated by this repo.
   own local roles table instead. First consumed by `customer-identity`'s
   `Step 2.3` seeder; `commercial-core`/`logistics-wms` pick it up whenever
   their own Step 5.0/8.0 actually mounts this package, not before.
+- `src/MachecContractsServiceProvider.php` (Step 2.5, D87) — registers the
+  `machec` view namespace and the `Machec\Contracts\View\Components` Blade
+  component namespace, auto-discovered via `composer.json`'s `extra.laravel`
+  key. `src/View/Components/{AdminNav,StatTile}.php` +
+  `resources/views/components/{admin-nav,stat-tile}.blade.php` (D20/D87) —
+  `<x-machec::admin-nav :links="[...]" />` (each app passes its own switcher
+  targets in, since only the consuming app knows the other two apps' URLs)
+  and `<x-machec::stat-tile label="..." :value="..." />`, first consumed by
+  `customer-identity`'s `Step 2.5`.
 
 ## What's still needed for v1
 
@@ -68,7 +77,6 @@ calls for them — no speculative scaffolding "while we're here."
 
 | Step | Adds | Consumed by |
 | --- | --- | --- |
-| **2.5** | `<x-machec::admin-nav>`, `<x-machec::stat-tile>` Blade components (D87/D88) | `customer-identity` (first), later `commercial-core` |
 | **5.2** | `Money` value object + `MoneyCast` (D25 — integer cents, never `float`/`decimal`) | `commercial-core` |
 | **5.3** | `CircuitBreaker` / `CircuitBreakerState` shared service (D36) | `commercial-core`, `logistics-wms` |
 
