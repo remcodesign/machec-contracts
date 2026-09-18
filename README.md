@@ -75,6 +75,14 @@ automated by this repo.
   `customer-identity`'s password-reset placeholder
   (`AdminPasswordResetNotificationMail`/`CustomerPasswordResetAcknowledgementMail`);
   Domain 9's order-confirmation mail becomes the second consumer later.
+- `src/View/Components/{ConfirmDeleteModal,RoleSelect}.php` +
+  `resources/views/components/{confirm-delete-modal,role-select}.blade.php`
+  (Step 2.9, D98) — `<x-machec::confirm-delete-modal>` (a generic
+  destructive-action confirmation dialog, its own named `<flux:modal>`
+  wired to a `wire:click`-style method call) and `<x-machec::role-select>`
+  (a `RoleName`-bound dropdown, scoped per caller via an `allowed-cases`
+  `$roles` prop). First consumed by `customer-identity`'s `UserIndex`
+  (delete) and `UserCreate`/`UserShow` (role field).
 
 ## What's still needed for v1
 
