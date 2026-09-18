@@ -19,7 +19,7 @@ abstract class MachecMailable extends Mailable
 {
     public function envelope(): Envelope
     {
-        return new Envelope(subject: $this->subject());
+        return new Envelope(subject: $this->subjectLine());
     }
 
     public function content(): Content
@@ -27,20 +27,20 @@ abstract class MachecMailable extends Mailable
         return new Content(
             view: 'machec::mail.layout',
             with: [
-                'innerView' => $this->view(),
-                'innerData' => $this->data(),
+                'innerView' => $this->bodyView(),
+                'innerData' => $this->bodyData(),
             ],
         );
     }
 
-    abstract protected function subject(): string;
+    abstract protected function subjectLine(): string;
 
-    abstract protected function view(): string;
+    abstract protected function bodyView(): string;
 
     /**
      * @return array<string, mixed>
      */
-    protected function data(): array
+    protected function bodyData(): array
     {
         return [];
     }
