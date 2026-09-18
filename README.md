@@ -83,6 +83,15 @@ automated by this repo.
   (a `RoleName`-bound dropdown, scoped per caller via an `allowed-cases`
   `$roles` prop). First consumed by `customer-identity`'s `UserIndex`
   (delete) and `UserCreate`/`UserShow` (role field).
+- `src/View/Components/RevealOnceSecret.php` +
+  `resources/views/components/reveal-once-secret.blade.php` (Step 2.10,
+  D103) — `<x-machec::reveal-once-secret>`, a plaintext-secret display
+  panel (copy button + explicit "I've copied it, close" confirmation,
+  never re-openable once dismissed). `$secret` is deliberately
+  non-nullable — the caller wraps its own usage in `@if`/`@unless` rather
+  than this component ever silently rendering blank. First consumed by
+  `customer-identity`'s `ServiceClientCreate`, showing a freshly-minted
+  Sanctum M2M token's plaintext exactly once (D99/D101/D102).
 
 ## What's still needed for v1
 
