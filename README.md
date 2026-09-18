@@ -68,6 +68,13 @@ automated by this repo.
   targets in, since only the consuming app knows the other two apps' URLs)
   and `<x-machec::stat-tile label="..." :value="..." />`, first consumed by
   `customer-identity`'s `Step 2.5`.
+- `src/Mail/MachecMailable.php` (Step 2.7, D79) — shared branded base for
+  every outbound email; a concrete Mailable supplies `subject()`/`view()`
+  (and optionally `data()`), `content()` wraps that view in the one shared
+  `resources/views/mail/layout.blade.php`. First consumed by
+  `customer-identity`'s password-reset placeholder
+  (`AdminPasswordResetNotificationMail`/`CustomerPasswordResetAcknowledgementMail`);
+  Domain 9's order-confirmation mail becomes the second consumer later.
 
 ## What's still needed for v1
 
